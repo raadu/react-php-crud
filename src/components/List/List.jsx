@@ -34,23 +34,36 @@ export function List() {
             <div>
                 <table>
                     <tbody>
-                        {list.data && list.data.headers.map((header) => {
+                        {list.data && list.data.headers.map((header, index) => {
                             return (
-                                <tr>
+                                <tr key={index}>
                                     <th>{header.id.title}</th>
                                     <th>{header.name.title}</th>
                                     <th>{header.created_at.title}</th>
                                     <th>{header.message.title}</th>
+                                    <th>Action</th>
                                 </tr>
                             );
                         })}
-                        {list.data && list.data.rows.map((tableData) => {
+                        {list.data && list.data.rows.map((tableData, index) => {
                             return (
-                                <tr>
+                                <tr key={index}>
                                     <td>{tableData.id}</td>
                                     <td>{tableData.name}</td>
                                     <td>{tableData.created_at}</td>
                                     <td>{tableData.message}</td>
+                                    <td>
+                                    <Link 
+                                        to={{
+                                            pathname: "/update",
+                                            state: tableData,
+                                        }}
+                                    >
+                                        <button>
+                                            Update
+                                        </button>
+                                    </Link>
+                                    </td>
                                 </tr>
                             );
                         })}
